@@ -1,12 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["mongoDb", "dataProxy"]
 }
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model accounts {
+  id         String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  account_id Int
+  limit      Int
+  products   String[]
+}
+
+model customers {
+  id               String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  accounts         Int[]
+  active           Boolean?
+  address          String
+  birthdate        DateTime @db.Date
+  email            String
+  name             String
+  tier_and_details Json
+  username         String
+}
+
+model transactions {
+  id                String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  account_id        Int
+  bucket_end_date   DateTime @db.Date
+  bucket_start_date DateTime @db.Date
+  transaction_count Int
+  transactions      Json[]
 }
