@@ -1,4 +1,4 @@
-name = "app"
+name = "prisma-mongodb-cloudflare"
 type = "webpack"
 route = ''
 zone_id = ''
