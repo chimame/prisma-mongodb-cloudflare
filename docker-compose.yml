@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+    entrypoint: /app/scripts/docker-entrypoint.sh
+    command: "npm run dev"
+    volumes:
+      - .:/app
+    ports:
+      - "8787:8787"
+    environment:
+      - DATABASE_URL
